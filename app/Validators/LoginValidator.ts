@@ -1,7 +1,7 @@
 import {rules, schema} from '@ioc:Adonis/Core/Validator';
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 
-export default class SignupValidator {
+export default class LoginValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -25,15 +25,7 @@ export default class SignupValidator {
    */
   public schema = schema.create({
     email: schema.string({trim: true}, [rules.email()]),
-    name: schema.string({trim: true}, [rules.required()]),
-    ages: schema.array().members(schema.number([rules.myRange(1, 100)])),
-    age: schema.number.optional([rules.myRange(12, 100)]),
-    addresses: schema.array().members(schema.object().members({
-      zipcode: schema.number(),
-      street: schema.string(),
-      city: schema.string.optional(),
-      country: schema.enum(['India', 'US', 'Russia', 'Australia', 'China'])
-    }))
+    password: schema.string(),
   });
 
   /**
@@ -47,9 +39,5 @@ export default class SignupValidator {
    * }
    *
    */
-  public messages = {
-    email: 'Not a valid mail',
-    myRange: '{{ field }} should be in range {{ options.start }}-{{ options.end }}',
-    enum: 'The {{ field }} should be among {{ options.choices }}'
-  };
+  public messages = {};
 }

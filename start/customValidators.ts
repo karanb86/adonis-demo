@@ -10,8 +10,10 @@
 
 import {validator} from '@ioc:Adonis/Core/Validator';
 
-validator.rule('myRange',(a, _, c) => {
-  if (a < 12 || a > 100) {
-    c.errorReporter.report(c.field, 'myRange', 'myRange failed');
+const newRule = 'myRange';
+
+validator.rule(newRule,(value, args: [number, number], {pointer, errorReporter, arrayExpressionPointer}) => {
+  if (value < args[0] || value > args[1]) {
+    errorReporter.report(pointer, newRule, 'myRange failed', arrayExpressionPointer, {start: args[0], end: args[1]});
   }
 });

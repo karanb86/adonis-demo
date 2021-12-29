@@ -5,7 +5,9 @@ export default class UsersController {
 
   public async store({}: HttpContextContract) {}
 
-  public async show({}: HttpContextContract) {}
+  public async show(ctx: HttpContextContract) {
+    return {user: ctx.request.loggedInUser};
+  }
 
   public async update({}: HttpContextContract) {}
 

@@ -5,8 +5,8 @@
  * file.
  */
 
-declare module '@ioc:Adonis/Core/Validator' {
-  interface Rules {
-    myRange(start, end): Rule
+declare module '@ioc:Adonis/Core/Request' {
+  interface RequestContract {
+   loggedInUser?: { id: number, email: string, password: string };
   }
 }

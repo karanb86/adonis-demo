@@ -28,4 +28,8 @@ Route.post('/login', 'AuthController.login');
 
 Route.post('/signup', 'AuthController.signup');
 
-Route.resource('users', 'UsersController').apiOnly();
+// Route.resource('users', 'UsersController').apiOnly().middleware({'*': 'auth'});
+
+Route.group(() => {
+  Route.resource('users', 'UsersController').apiOnly();
+}).middleware('auth');
